@@ -66,6 +66,49 @@ A beautiful Laravel-based web application that showcases fashion inspiration sen
 
    Visit [http://localhost:8000](http://localhost:8000) to see your fashion dashboard!
 
+## � Deploy to Vercel
+
+### One-Click Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alyasy07/yves-archive)
+
+### Manual Deployment
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Login to Vercel**
+   ```bash
+   vercel login
+   ```
+
+3. **Deploy**
+   ```bash
+   vercel
+   ```
+
+4. **Set Environment Variables on Vercel**
+   
+   Go to your project settings on Vercel Dashboard and add:
+   - `APP_KEY` - Generate with `php artisan key:generate --show`
+   - `TELEGRAM_BOT_TOKEN` - Your bot token from BotFather
+   - `APP_ENV` - Set to `production`
+   - `APP_DEBUG` - Set to `false`
+
+5. **Deploy to Production**
+   ```bash
+   vercel --prod
+   ```
+
+### Important Notes for Vercel
+
+- Cache files are stored in `/tmp` directory (ephemeral)
+- For persistent storage, consider using external cache services (Redis, Memcached)
+- Sessions use cookie driver for serverless compatibility
+- Build assets before deploying: `npm run build`
+
 ## 🔧 Configuration
 
 ### Getting Your Telegram Bot Token
@@ -81,7 +124,10 @@ A beautiful Laravel-based web application that showcases fashion inspiration sen
 |----------|-------------|---------|
 | `TELEGRAM_BOT_TOKEN` | Your bot token from BotFather | `123456789:ABCdefGHIjklMNOpqrsTUVwxyz` |
 | `APP_NAME` | Application name | `Shop With Yves` |
-| `APP_URL` | Application URL | `http://localhost` |
+| `APP_URL` | Application URL | `http://localhost` or your Vercel URL |
+| `APP_KEY` | Application encryption key | `base64:...` (generate with artisan) |
+| `APP_ENV` | Environment | `local` or `production` |
+| `APP_DEBUG` | Debug mode | `true` or `false` |
 
 ## 🎨 Customization
 
