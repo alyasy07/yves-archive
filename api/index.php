@@ -1,22 +1,14 @@
 <?php
 
-// Vercel Serverless Function Entry Point
-// Set up paths for Laravel in serverless environment
-
-define('LARAVEL_START', microtime(true));
+// Vercel Serverless Function Entry Point for Laravel
 
 // Register the Composer autoloader
 require __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap Laravel and handle the request
+// Bootstrap Laravel application
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
+// Create and handle the HTTP request
+$app->handleRequest(
+    Illuminate\Http\Request::capture()
 );
-
-$response->send();
-
-$kernel->terminate($request, $response);
