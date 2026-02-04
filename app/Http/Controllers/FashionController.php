@@ -23,13 +23,9 @@ class FashionController extends Controller
             // Configure Telegram API
             $telegram = new \Telegram\Bot\Api($botToken);
             
-            // Cache the updates for 5 minutes to avoid repeated API calls
-            $fashionPosts = Cache::remember('telegram_fashion_posts', 300, function () use ($telegram, $botToken) {
-                // Get updates (messages sent to the bot)
-                $updates = $telegram->getUpdates([
-                    'timeout' => 30,
-                    'limit' => 100,
-                ]);
+            // Guna Cache supaya website laju
+            $fashionPosts = Cache::remember('fashion_posts', 3600, function () use ($telegram) {
+                $updates = $telegram->getUpdates(['offset' => -10]);
                 
                 $posts = [];
                 
