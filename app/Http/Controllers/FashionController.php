@@ -25,7 +25,8 @@ class FashionController extends Controller
             
             // Guna Cache supaya website laju
             $fashionPosts = Cache::remember('fashion_posts', 3600, function () use ($telegram) {
-                $updates = $telegram->getUpdates(['offset' => -10]);
+                // Fetch up to 100 updates, with 0 timeout for instant response (processed in background ideally, but here cached)
+                $updates = $telegram->getUpdates(['limit' => 100, 'timeout' => 0]);
                 
                 $posts = [];
                 
