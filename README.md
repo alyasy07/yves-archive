@@ -333,5 +333,6 @@ For questions or support, please open an issue on GitHub.
 ---
 
 Made with 💖 for fashion lovers
-#   F o r c e   V e r c e l   R e d e p l o y  
+#   F o r c e   V e r c e l   R e d e p l o y 
+ 
  
