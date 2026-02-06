@@ -1,338 +1,264 @@
-# 🎀 Shop With Yves - Fashion Inspo Dashboard
+# 🎀 Shop With Yves - Fashion Inspiration Dashboard
 
-A beautiful Laravel-based web application that showcases fashion inspiration sent to your Telegram bot. Built with a modern "coquette" aesthetic featuring soft pinks, purples, and elegant design elements.
+A beautiful Laravel web application that curates fashion inspiration from your Telegram bot. Featuring a modern "coquette" aesthetic with soft pinks, purples, and elegant design elements.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.0-646CFF?style=flat&logo=vite&logoColor=white)
 
 ## ✨ Features
 
-- 🤖 **Telegram Bot Integration** - Automatically fetches photos sent to your bot
-- 📸 **Photo Filtering** - Displays only messages containing fashion photos
-- 🛍️ **Shopee Link Extraction** - Automatically detects and highlights shopping links
-- 🎨 **Coquette Aesthetic** - Beautiful gradient backgrounds, rounded corners, and soft shadows
-- 📱 **Responsive Masonry Grid** - Adapts from 1 to 4 columns based on screen size
-- ⚡ **Built with Vite** - Fast development and optimized production builds
+### 🤖 **Telegram Integration**
+- Automatically fetches photos from your Telegram bot
+- Smart filtering to display only fashion-related content
+- Shopee link detection and highlighting
+
+### 🎨 **Beautiful Design**
+- Coquette aesthetic with soft gradients and elegant UI
+- Fully responsive masonry grid layout (1-4 columns)
+- Smooth animations and transitions
+
+### ⚡ **Optimized Performance**
+- Built with Vite for fast development and production builds
+- Smart caching to reduce API calls by 80% (100+ → 20 calls)
+- Lazy loading for images
+
+### 🔧 **Developer Friendly**
+- Easy configuration via environment variables
+- Modern Laravel 12 architecture
+- Clear project structure
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- PHP 8.2 or higher
+- PHP 8.2+
 - Composer
-- Node.js & npm
-- A Telegram Bot Token (from [@BotFather](https://t.me/botfather))
+- Node.js 18+ & npm
+- Telegram Bot Token ([Get from @BotFather](https://t.me/botfather))
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone and navigate to the project**
    ```bash
-   cd c:\laragon\www\yves-archive
-   ```
+   git clone <repository-url>
+   cd yves-archive
+Install backend dependencies
 
-2. **Install PHP dependencies**
-   ```bash
-   composer install
-   ```
+bash
+composer install
+Install frontend dependencies
 
-3. **Install Node.js dependencies**
-   ```bash
-   npm install
-   ```
+bash
+npm install
+Configure environment
 
-4. **Configure environment**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+bash
+cp .env.example .env
+php artisan key:generate
+Add Telegram configuration
+Edit .env and add:
 
-5. **Set up Telegram credentials**
-   
-   Edit your `.env` file and add:
-   ```env
-   TELEGRAM_BOT_TOKEN=your_bot_token_from_botfather
-   ```
+env
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+# Optional: TELEGRAM_CHANNEL_ID=your_channel_id
+Build assets
 
-6. **Build frontend assets**
-   ```bash
-   npm run build
-   ```
+bash
+npm run build
+Start development server
 
-7. **Run the application**
-   ```bash
-   php artisan serve
-   ```
+bash
+php artisan serve
+Open http://localhost:8000
 
-   Visit [http://localhost:8000](http://localhost:8000) to see your fashion dashboard!
+☁️ Deployment
+Deploy to Vercel
+https://vercel.com/button
 
-## � Deploy to Vercel
+Manual Vercel Deployment
+Install Vercel CLI
 
-### One-Click Deploy
+bash
+npm install -g vercel
+Login and deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alyasy07/yves-archive)
+bash
+vercel login
+vercel
+Set environment variables in Vercel Dashboard:
 
-### Manual Deployment
+APP_KEY (generate with php artisan key:generate --show)
 
-1. **Install Vercel CLI**
-   ```bash
-   npm install -g vercel
-   ```
+TELEGRAM_BOT_TOKEN (your bot token)
 
-2. **Login to Vercel**
-   ```bash
-   vercel login
-   ```
+APP_ENV=production
 
-3. **Deploy**
-   ```bash
-   vercel
-   ```
+APP_DEBUG=false
 
-4. **Set Environment Variables on Vercel**
-   
-   Go to your project settings on Vercel Dashboard and add:
-   - `APP_KEY` - Generate with `php artisan key:generate --show`
-   - `TELEGRAM_BOT_TOKEN` - Your bot token from BotFather
-   - `APP_ENV` - Set to `production`
-   - `APP_DEBUG` - Set to `false`
+Deploy to production
 
-5. **Deploy to Production**
-   ```bash
-   vercel --prod
-   ```
+bash
+vercel --prod
+⚠️ Important Vercel Notes
+Cache files are stored in /tmp (ephemeral)
 
-### Important Notes for Vercel
+Consider external cache services (Redis/Memcached) for production
 
-- Cache files are stored in `/tmp` directory (ephemeral)
-- For persistent storage, consider using external cache services (Redis, Memcached)
-- Sessions use cookie driver for serverless compatibility
-- Build assets before deploying: `npm run build`
+Sessions use cookie driver for serverless compatibility
 
-## 🔧 Configuration
+Run npm run build before deploying
 
-### Getting Your Telegram Bot Token
+⚙️ Configuration
+Telegram Bot Setup
+Create a bot via @BotFather
 
-1. Open Telegram and search for [@BotFather](https://t.me/botfather)
-2. Send `/newbot` and follow the instructions
-3. Copy the bot token provided
-4. Users can now send photos directly to your bot
+Copy the API token
 
-### Environment Variables
+Share the bot with users who can send fashion inspiration
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `TELEGRAM_BOT_TOKEN` | Your bot token from BotFather | `123456789:ABCdefGHIjklMNOpqrsTUVwxyz` |
-| `APP_NAME` | Application name | `Shop With Yves` |
-| `APP_URL` | Application URL | `http://localhost` or your Vercel URL |
-| `APP_KEY` | Application encryption key | `base64:...` (generate with artisan) |
-| `APP_ENV` | Environment | `local` or `production` |
-| `APP_DEBUG` | Debug mode | `true` or `false` |
+Add token to .env file
 
-## 🎨 Customization
+Environment Variables
+Variable	Required	Description	Example
+TELEGRAM_BOT_TOKEN	✅	Bot API token	123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+APP_ENV	❌	Application environment	production
+APP_DEBUG	❌	Debug mode	false
+APP_URL	❌	Application URL	https://your-app.vercel.app
+APP_NAME	❌	Application name	Shop With Yves
+🎨 Customization
+Changing Colors
+Edit tailwind.config.js to customize the color palette:
 
-### Changing Colors
-
-Edit [tailwind.config.js](tailwind.config.js) to customize the color palette:
-
-```javascript
-theme: {
-  extend: {
-    colors: {
-      pink: {
-        // Your custom pink shades
-      },
-      purple: {
-        // Your custom purple shades
-      },
-    },
-  },
-}
-```
-
-### Modifying Post Count
-
-Edit [app/Http/Controllers/FashionController.php](app/Http/Controllers/FashionController.php), line 48:
-
-```php
-$fashionPosts = array_slice($fashionPosts, 0, 50); // Change 50 to your desired limit
-```
-
-### Grid Layout
-
-Adjust the masonry grid in [resources/views/dashboard.blade.php](resources/views/dashboard.blade.php):
-
-```css
-.masonry {
-    column-count: 1; /* Mobile: 1 column */
-}
-
-@media (min-width: 640px) {
-    .masonry {
-        column-count: 2; /* Tablet: 2 columns */
+javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'coquette-pink': {
+          50: '#fdf2f8',
+          100: '#fce7f3',
+          // Add custom shades
+        }
+      }
     }
+  }
 }
+Modifying Post Limit
+Edit app/Http/Controllers/FashionController.php:
 
-@media (min-width: 1024px) {
-    .masonry {
-        column-count: 3; /* Desktop: 3 columns */
-    }
-}
+php
+$fashionPosts = array_slice($fashionPosts, 0, 50); // Change 50 to desired number
+Grid Layout
+Adjust columns in resources/views/dashboard.blade.php:
 
-@media (min-width: 1280px) {
-    .masonry {
-        column-count: 4; /* Large desktop: 4 columns */
-    }
-}
-```
-
-## 📁 Project Structure
-
-```
+css
+/* Default: 1 column on mobile, up to 4 on desktop */
+@media (min-width: 1024px) { .masonry { columns: 3; } }
+@media (min-width: 1280px) { .masonry { columns: 4; } }
+📁 Project Structure
+text
 yves-archive/
 ├── app/
-│   └── Http/
-│       └── Controllers/
-│           └── FashionController.php    # Main controller for fetching posts
+│   ├── Http/Controllers/FashionController.php   # Main logic
+│   └── Services/TelegramService.php             # Telegram API handling
 ├── config/
-│   └── telegram.php                     # Telegram configuration
+│   └── telegram.php                             # Bot configuration
 ├── resources/
-│   ├── css/
-│   │   └── app.css                      # Tailwind CSS imports
-│   └── views/
-│       └── dashboard.blade.php          # Main dashboard view
-├── routes/
-│   └── web.php                          # Application routes
-├── .env                                 # Environment configuration
-├── tailwind.config.js                   # Tailwind CSS configuration
-└── vite.config.js                       # Vite build configuration
-```
+│   ├── views/dashboard.blade.php                # Main view
+│   └── css/app.css                              # Tailwind imports
+├── routes/web.php                               # Application routes
+├── tailwind.config.js                           # Tailwind config
+├── vite.config.js                               # Vite configuration
+└── vercel.json                                  # Vercel deployment config
+🛠️ Development
+Development Mode
+Start both frontend and backend servers:
 
-## 🛠️ Development
-
-### Watch mode for frontend development
-
-```bash
-npm run dev
-```
-
-This will start Vite's development server with hot module replacement.
-
-### Running Laravel development server
-
-```bash
+bash
+# Terminal 1: Backend
 php artisan serve
-```
 
-## 📦 Tech Stack
-
-- **Backend Framework**: Laravel 12
-- **Telegram SDK**: [irazasyed/telegram-bot-sdk](https://github.com/irazasyed/telegram-bot-sdk)
-- **Frontend Framework**: Tailwind CSS 4.0
-- **Build Tool**: Vite 7
-- **Template Engine**: Blade
-- **PHP Version**: 8.2+
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 🎓 Skills Learned
-
-Building this project provided hands-on experience with:
-
-### Backend Development
-- **Laravel Framework** - MVC architecture, routing, controllers, and blade templating
-- **PHP 8.2+** - Modern PHP features and best practices
-- **API Integration** - Working with Telegram Bot API (getUpdates, getFile)
-- **Caching Strategies** - Implementing Laravel Cache for performance optimization
-- **Data Processing** - Filtering, sorting, and pagination of API responses
-
-### Frontend Development
-- **CSS Animations** - Keyframes, transforms, and transitions for smooth UI effects
-- **Responsive Design** - Mobile-first approach with CSS Grid and Flexbox
-- **Custom UI Design** - Creating a cohesive "coquette" aesthetic from scratch
-- **Gradient & Effects** - Advanced CSS gradients, shadows, and backdrop filters
-- **Icon Integration** - Using external icon libraries (Icons8 pixel icons)
-
-### Performance Optimization
-- **API Call Reduction** - Smart caching to minimize external requests (100+ → 20 calls)
-- **Pagination** - Implementing efficient data pagination (20 items per page)
-- **Lazy Loading** - Image loading optimization with browser native lazy loading
-- **Cache Management** - Time-based cache expiration (5 min updates, 1 hour photos)
-
-### UX/UI Patterns
-- **Modal Interactions** - Building accessible modals for image preview and captions
-- **Loading States** - Managing asynchronous data fetching and error handling
-- **Visual Feedback** - Hover effects, active states, and smooth animations
-- **Typography & Fonts** - Selecting and pairing Google Fonts (Fredoka, Quicksand)
-
-### Tools & Workflow
-- **Composer** - PHP dependency management
-- **npm** - JavaScript package management
-- **Vite** - Modern frontend build tool
-- **Git** - Version control and project documentation
-- **Environment Config** - Managing sensitive credentials with .env files
-
-### Problem Solving
-- **Debugging API Issues** - Troubleshooting Telegram API responses
-- **Performance Bottlenecks** - Identifying and fixing slow page loads
-- **Cross-browser Compatibility** - Ensuring consistent rendering across browsers
-- **Data Extraction** - Regex patterns for extracting Shopee links from captions
-
-## 📝 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
-## 💖 Acknowledgments
-
-- Built with love for fashion enthusiasts
-- Inspired by the coquette aesthetic
-- Powered by the Telegram Bot API
-- Special thanks to the Laravel and Tailwind CSS communities
-
-## 🐛 Troubleshooting
-
-### "Error fetching posts" message
-
-1. Verify your `TELEGRAM_BOT_TOKEN` is correct
-2. Ensure your bot is added as an admin to your channel
-3. Check that `TELEGRAM_CHANNEL_ID` starts with `-100`
-4. Make sure your bot has permission to read messages
-
-### No posts showing
-
-1. Confirm your channel has posts with photos
-2. Verify the bot can access channel history
-3. Check Laravel logs in `storage/logs/laravel.log`
-
-### Build errors
-
-```bash
-# Clear npm cache
-npm cache clean --force
-
-# Reinstall dependencies
-rm -rf node_modules
-npm install
-
-# Rebuild
+# Terminal 2: Frontend (with hot reload)
+npm run dev
+Production Build
+bash
 npm run build
-```
+🐛 Troubleshooting
+Common Issues
+"Error fetching posts"
 
-## 📧 Contact
+Verify TELEGRAM_BOT_TOKEN is correct
 
-For questions or support, please open an issue on GitHub.
+Ensure bot has access to channel/group
 
----
+Check channel ID format (should start with -100 for channels)
 
-Made with 💖 for fashion lovers
-#   F o r c e   V e r c e l   R e d e p l o y 
- 
- 
+No posts showing
+
+Confirm channel has photo posts
+
+Check Laravel logs: tail -f storage/logs/laravel.log
+
+Verify bot permissions
+
+Build errors
+
+bash
+# Clear caches and reinstall
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+📖 API Reference
+Telegram Integration
+The app uses Telegram's getUpdates API to fetch messages. Key features:
+
+Filters for photo messages only
+
+Extracts Shopee links from captions
+
+Caches results for 5 minutes (configurable)
+
+Endpoints
+GET / - Main dashboard view
+
+GET /api/fashion-posts - JSON API endpoint (optional)
+
+🤝 Contributing
+Fork the repository
+
+Create a feature branch: git checkout -b feature/amazing-feature
+
+Commit changes: git commit -m 'Add amazing feature'
+
+Push to branch: git push origin feature/amazing-feature
+
+Open a Pull Request
+
+Development Guidelines
+Follow PSR-12 coding standards
+
+Write clear commit messages
+
+Update documentation as needed
+
+Add tests for new features
+
+📝 License
+MIT License - see LICENSE file for details.
+
+👏 Acknowledgments
+Telegram Bot API for messaging infrastructure
+
+Laravel Community for the excellent framework
+
+Tailwind CSS for the utility-first CSS framework
+
+Icons8 for pixel-perfect icons
+
+📬 Support
+Issues: GitHub Issues
+
+Documentation: Refer to this README
+
+Questions: Open a discussion on GitHub
