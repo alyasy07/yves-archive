@@ -79,41 +79,6 @@ A beautiful Laravel web application that curates fashion inspiration from your T
    ```
    Open [http://localhost:8000](http://localhost:8000)
 
-## ☁️ Deployment
-
-### Deploy to Vercel
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
-### Manual Vercel Deployment
-
-1. **Install Vercel CLI**
-   ```bash
-   npm install -g vercel
-   ```
-
-2. **Login and deploy**
-   ```bash
-   vercel login
-   vercel
-   ```
-
-3. **Set environment variables in Vercel Dashboard:**
-   - `APP_KEY` (generate with `php artisan key:generate --show`)
-   - `TELEGRAM_BOT_TOKEN` (your bot token)
-   - `APP_ENV=production`
-   - `APP_DEBUG=false`
-
-4. **Deploy to production**
-   ```bash
-   vercel --prod
-   ```
-
-### ⚠️ Important Vercel Notes
-- Cache files are stored in `/tmp` (ephemeral)
-- Consider external cache services (Redis/Memcached) for production
-- Sessions use cookie driver for serverless compatibility
-- Run `npm run build` before deploying
-
 ## ⚙️ Configuration
 
 ### Telegram Bot Setup
