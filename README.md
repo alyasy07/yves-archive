@@ -43,94 +43,101 @@ A beautiful Laravel web application that curates fashion inspiration from your T
    ```bash
    git clone <repository-url>
    cd yves-archive
-Install backend dependencies
+   ```
 
-bash
-composer install
-Install frontend dependencies
+2. **Install backend dependencies**
+   ```bash
+   composer install
+   ```
 
-bash
-npm install
-Configure environment
+3. **Install frontend dependencies**
+   ```bash
+   npm install
+   ```
 
-bash
-cp .env.example .env
-php artisan key:generate
-Add Telegram configuration
-Edit .env and add:
+4. **Configure environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-env
-TELEGRAM_BOT_TOKEN=your_bot_token_here
-# Optional: TELEGRAM_CHANNEL_ID=your_channel_id
-Build assets
+5. **Add Telegram configuration**
+   Edit `.env` and add:
+   ```env
+   TELEGRAM_BOT_TOKEN=your_bot_token_here
+   # Optional: TELEGRAM_CHANNEL_ID=your_channel_id
+   ```
 
-bash
-npm run build
-Start development server
+6. **Build assets**
+   ```bash
+   npm run build
+   ```
 
-bash
-php artisan serve
-Open http://localhost:8000
+7. **Start development server**
+   ```bash
+   php artisan serve
+   ```
+   Open [http://localhost:8000](http://localhost:8000)
 
-☁️ Deployment
-Deploy to Vercel
-https://vercel.com/button
+## ☁️ Deployment
 
-Manual Vercel Deployment
-Install Vercel CLI
+### Deploy to Vercel
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-bash
-npm install -g vercel
-Login and deploy
+### Manual Vercel Deployment
 
-bash
-vercel login
-vercel
-Set environment variables in Vercel Dashboard:
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
 
-APP_KEY (generate with php artisan key:generate --show)
+2. **Login and deploy**
+   ```bash
+   vercel login
+   vercel
+   ```
 
-TELEGRAM_BOT_TOKEN (your bot token)
+3. **Set environment variables in Vercel Dashboard:**
+   - `APP_KEY` (generate with `php artisan key:generate --show`)
+   - `TELEGRAM_BOT_TOKEN` (your bot token)
+   - `APP_ENV=production`
+   - `APP_DEBUG=false`
 
-APP_ENV=production
+4. **Deploy to production**
+   ```bash
+   vercel --prod
+   ```
 
-APP_DEBUG=false
+### ⚠️ Important Vercel Notes
+- Cache files are stored in `/tmp` (ephemeral)
+- Consider external cache services (Redis/Memcached) for production
+- Sessions use cookie driver for serverless compatibility
+- Run `npm run build` before deploying
 
-Deploy to production
+## ⚙️ Configuration
 
-bash
-vercel --prod
-⚠️ Important Vercel Notes
-Cache files are stored in /tmp (ephemeral)
+### Telegram Bot Setup
+1. Create a bot via [@BotFather](https://t.me/botfather)
+2. Copy the API token
+3. Share the bot with users who can send fashion inspiration
+4. Add token to `.env` file
 
-Consider external cache services (Redis/Memcached) for production
+### Environment Variables
 
-Sessions use cookie driver for serverless compatibility
+| Variable | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| `TELEGRAM_BOT_TOKEN` | ✅ | Bot API token | `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11` |
+| `APP_ENV` | ❌ | Application environment | `production` |
+| `APP_DEBUG` | ❌ | Debug mode | `false` |
+| `APP_URL` | ❌ | Application URL | `https://your-app.vercel.app` |
+| `APP_NAME` | ❌ | Application name | `Shop With Yves` |
 
-Run npm run build before deploying
+## 🎨 Customization
 
-⚙️ Configuration
-Telegram Bot Setup
-Create a bot via @BotFather
+### Changing Colors
+Edit `tailwind.config.js` to customize the color palette:
 
-Copy the API token
-
-Share the bot with users who can send fashion inspiration
-
-Add token to .env file
-
-Environment Variables
-Variable	Required	Description	Example
-TELEGRAM_BOT_TOKEN	✅	Bot API token	123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-APP_ENV	❌	Application environment	production
-APP_DEBUG	❌	Debug mode	false
-APP_URL	❌	Application URL	https://your-app.vercel.app
-APP_NAME	❌	Application name	Shop With Yves
-🎨 Customization
-Changing Colors
-Edit tailwind.config.js to customize the color palette:
-
-javascript
+```javascript
 module.exports = {
   theme: {
     extend: {
@@ -144,20 +151,27 @@ module.exports = {
     }
   }
 }
-Modifying Post Limit
-Edit app/Http/Controllers/FashionController.php:
+```
 
-php
+### Modifying Post Limit
+Edit `app/Http/Controllers/FashionController.php`:
+
+```php
 $fashionPosts = array_slice($fashionPosts, 0, 50); // Change 50 to desired number
-Grid Layout
-Adjust columns in resources/views/dashboard.blade.php:
+```
 
-css
+### Grid Layout
+Adjust columns in `resources/views/dashboard.blade.php`:
+
+```css
 /* Default: 1 column on mobile, up to 4 on desktop */
 @media (min-width: 1024px) { .masonry { columns: 3; } }
 @media (min-width: 1280px) { .masonry { columns: 4; } }
-📁 Project Structure
-text
+```
+
+## 📁 Project Structure
+
+```text
 yves-archive/
 ├── app/
 │   ├── Http/Controllers/FashionController.php   # Main logic
@@ -171,94 +185,93 @@ yves-archive/
 ├── tailwind.config.js                           # Tailwind config
 ├── vite.config.js                               # Vite configuration
 └── vercel.json                                  # Vercel deployment config
-🛠️ Development
-Development Mode
+```
+
+## 🛠️ Development
+
+### Development Mode
 Start both frontend and backend servers:
 
-bash
+```bash
 # Terminal 1: Backend
 php artisan serve
 
 # Terminal 2: Frontend (with hot reload)
 npm run dev
-Production Build
-bash
+```
+
+### Production Build
+```bash
 npm run build
-🐛 Troubleshooting
-Common Issues
-"Error fetching posts"
+```
 
-Verify TELEGRAM_BOT_TOKEN is correct
+## 🐛 Troubleshooting
 
-Ensure bot has access to channel/group
+### Common Issues
 
-Check channel ID format (should start with -100 for channels)
+**"Error fetching posts"**
+- Verify `TELEGRAM_BOT_TOKEN` is correct
+- Ensure bot has access to channel/group
+- Check channel ID format (should start with `-100` for channels)
 
-No posts showing
+**No posts showing**
+- Confirm channel has photo posts
+- Check Laravel logs: `tail -f storage/logs/laravel.log`
+- Verify bot permissions
 
-Confirm channel has photo posts
-
-Check Laravel logs: tail -f storage/logs/laravel.log
-
-Verify bot permissions
-
-Build errors
-
-bash
+**Build errors**
+```bash
 # Clear caches and reinstall
 npm cache clean --force
 rm -rf node_modules package-lock.json
 npm install
-📖 API Reference
-Telegram Integration
-The app uses Telegram's getUpdates API to fetch messages. Key features:
+```
 
-Filters for photo messages only
+## 📖 API Reference
 
-Extracts Shopee links from captions
+### Telegram Integration
+The app uses Telegram's `getUpdates` API to fetch messages. Key features:
+- Filters for photo messages only
+- Extracts Shopee links from captions
+- Caches results for 5 minutes (configurable)
 
-Caches results for 5 minutes (configurable)
+### Endpoints
+- `GET /` - Main dashboard view
+- `GET /api/fashion-posts` - JSON API endpoint (optional)
 
-Endpoints
-GET / - Main dashboard view
+## 🤝 Contributing
 
-GET /api/fashion-posts - JSON API endpoint (optional)
+1. **Fork the repository**
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit changes:**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+4. **Push to branch:**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
 
-🤝 Contributing
-Fork the repository
+### Development Guidelines
+- Follow PSR-12 coding standards
+- Write clear commit messages
+- Update documentation as needed
+- Add tests for new features
 
-Create a feature branch: git checkout -b feature/amazing-feature
-
-Commit changes: git commit -m 'Add amazing feature'
-
-Push to branch: git push origin feature/amazing-feature
-
-Open a Pull Request
-
-Development Guidelines
-Follow PSR-12 coding standards
-
-Write clear commit messages
-
-Update documentation as needed
-
-Add tests for new features
-
-📝 License
+## 📝 License
 MIT License - see LICENSE file for details.
 
-👏 Acknowledgments
-Telegram Bot API for messaging infrastructure
+## 👏 Acknowledgments
+- **Telegram Bot API** for messaging infrastructure
+- **Laravel Community** for the excellent framework
+- **Tailwind CSS** for the utility-first CSS framework
+- **Icons8** for pixel-perfect icons
 
-Laravel Community for the excellent framework
-
-Tailwind CSS for the utility-first CSS framework
-
-Icons8 for pixel-perfect icons
-
-📬 Support
-Issues: GitHub Issues
-
-Documentation: Refer to this README
-
-Questions: Open a discussion on GitHub
+## 📬 Support
+- **Issues:** [GitHub Issues](https://github.com/issues)
+- **Documentation:** Refer to this README
+- **Questions:** Open a discussion on GitHub
